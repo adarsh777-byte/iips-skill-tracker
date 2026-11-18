@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skill Form - IIPS Skill Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: navbar('skills')}"></div>
+
+<main class="container">
+    <div class="page-header">
+        <h2 th:text="${item.id == null} ? 'Add Skill' : 'Edit Skill'">Skill</h2>
+    </div>
+
+    <form class="card form-card" th:action="@{/skills/save}" th:object="${item}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="skillName">Skill Name <span class="req">*</span></label>
+            <input type="text" id="skillName" th:field="*{skillName}">
+            <span class="field-error" th:if="${#fields.hasErrors('skillName')}" th:errors="*{skillName}"></span>
+        </div>
+        <div class="form-group">
+            <label for="category">Category <span class="req">*</span></label>
+            <select id="category" th:field="*{category}">
+                <option th:each="o : ${categoryOptions}" th:value="${o}" th:text="${o}"></option>
+            </select>
+            <span class="field-error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+        </div>
+        <div class="form-group">
+            <label for="skillLevel">Skill Level <span class="req">*</span></label>
+            <select id="skillLevel" th:field="*{skillLevel}">
+                <option th:each="o : ${skillLevelOptions}" th:value="${o}" th:text="${o}"></option>
+            </select>
+            <span class="field-error" th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-secondary" th:href="@{/skills}">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<div th:replace="~{fragments :: footer}"></div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

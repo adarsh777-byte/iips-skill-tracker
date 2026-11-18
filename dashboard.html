@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - IIPS Skill Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: navbar('dashboard')}"></div>
+
+<main class="container">
+    <div class="welcome">
+        <h2>IIPS Skill Development &amp; Certification Tracking System</h2>
+        <p>Welcome, <strong th:text="${loggedStudentName}">Student</strong></p>
+    </div>
+
+    <section class="summary-grid">
+        <div class="summary-card c-blue">
+            <span class="summary-number" th:text="${nptelCount}">0</span>
+            <span class="summary-label">Total NPTEL Courses</span>
+        </div>
+        <div class="summary-card c-green">
+            <span class="summary-number" th:text="${swayamCount}">0</span>
+            <span class="summary-label">Total SWAYAM Courses</span>
+        </div>
+        <div class="summary-card c-orange">
+            <span class="summary-number" th:text="${courseraCount}">0</span>
+            <span class="summary-label">Total Coursera Courses</span>
+        </div>
+        <div class="summary-card c-purple">
+            <span class="summary-number" th:text="${certificationCount}">0</span>
+            <span class="summary-label">Total Certifications</span>
+        </div>
+        <div class="summary-card c-teal">
+            <span class="summary-number" th:text="${skillCount}">0</span>
+            <span class="summary-label">Total Skills</span>
+        </div>
+    </section>
+
+    <h3 class="section-title">Quick Navigation</h3>
+    <section class="nav-grid">
+        <a class="nav-card" th:href="@{/nptel}">NPTEL</a>
+        <a class="nav-card" th:href="@{/swayam}">SWAYAM</a>
+        <a class="nav-card" th:href="@{/coursera}">Coursera</a>
+        <a class="nav-card" th:href="@{/certifications}">Certifications</a>
+        <a class="nav-card" th:href="@{/skills}">My Skill Portfolio</a>
+        <a class="nav-card nav-card-logout" th:href="@{/logout}">Logout</a>
+    </section>
+</main>
+
+<div th:replace="~{fragments :: footer}"></div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

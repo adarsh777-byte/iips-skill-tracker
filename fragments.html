@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head>
+<body>
+
+<header th:fragment="navbar(active)" class="site-header">
+    <div class="header-top">
+        <div class="brand">
+            <span class="brand-title">IIPS Skill Development &amp; Certification Tracking System</span>
+        </div>
+        <div class="user-box">
+            <span th:if="${loggedStudentName != null}" th:text="'Hi, ' + ${loggedStudentName}">Hi, Student</span>
+            <a class="btn btn-small btn-logout" th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+    <nav class="main-nav">
+        <a th:href="@{/dashboard}" th:classappend="${active == 'dashboard'} ? 'active'">Dashboard</a>
+        <a th:href="@{/nptel}" th:classappend="${active == 'nptel'} ? 'active'">NPTEL</a>
+        <a th:href="@{/swayam}" th:classappend="${active == 'swayam'} ? 'active'">SWAYAM</a>
+        <a th:href="@{/coursera}" th:classappend="${active == 'coursera'} ? 'active'">Coursera</a>
+        <a th:href="@{/certifications}" th:classappend="${active == 'certifications'} ? 'active'">Certifications</a>
+        <a th:href="@{/skills}" th:classappend="${active == 'skills'} ? 'active'">My Skill Portfolio</a>
+    </nav>
+</header>
+
+<div th:fragment="messages">
+    <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+</div>
+
+<footer th:fragment="footer" class="site-footer">
+    IIPS Skill Development &amp; Certification Tracking System &mdash; Minor Lab Project
+</footer>
+
+</body>
+</html>

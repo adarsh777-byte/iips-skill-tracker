@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error - IIPS Skill Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="login-body">
+<div class="login-box error-box">
+    <h1 th:text="${status != null} ? ${status} : 'Error'">Error</h1>
+    <h2>Something went wrong</h2>
+    <p>Sorry, we could not complete your request. The page may not exist or an unexpected problem occurred.</p>
+    <a class="btn btn-primary" th:href="@{/dashboard}">Back to Dashboard</a>
+</div>
+</body>
+</html>

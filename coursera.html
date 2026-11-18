@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coursera Courses - IIPS Skill Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: navbar('coursera')}"></div>
+
+<main class="container">
+    <div class="page-header">
+        <h2>Coursera Courses</h2>
+        <a class="btn btn-primary" th:href="@{/coursera/new}">+ Add Coursera Course</a>
+    </div>
+
+    <div th:replace="~{fragments :: messages}"></div>
+
+    <div class="card table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Provider</th>
+                    <th>Certificate ID</th>
+                    <th>Completion Date</th>
+                    <th>Skills Acquired</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="i : ${items}">
+                    <td th:text="${i.courseName} ?: '-'"></td>
+                    <td th:text="${i.provider} ?: '-'"></td>
+                    <td th:text="${i.certificateId} ?: '-'"></td>
+                    <td th:text="${i.completionDate != null ? #temporals.format(i.completionDate, 'dd-MM-yyyy') : '-'}"></td>
+                    <td th:text="${i.skillsAcquired} ?: '-'"></td>
+                    <td class="actions">
+                        <a class="btn btn-small btn-edit" th:href="@{/coursera/edit/{id}(id=${i.id})}">Edit</a>
+                        <form th:action="@{/coursera/delete/{id}(id=${i.id})}" method="post"
+                              onsubmit="return confirmDelete('this Coursera Course');">
+                            <button type="submit" class="btn btn-small btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(items)}">
+                    <td colspan="6" class="empty">No records yet. Click "Add Coursera Course" to create one.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<div th:replace="~{fragments :: footer}"></div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

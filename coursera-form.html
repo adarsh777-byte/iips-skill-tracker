@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coursera Course Form - IIPS Skill Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: navbar('coursera')}"></div>
+
+<main class="container">
+    <div class="page-header">
+        <h2 th:text="${item.id == null} ? 'Add Coursera Course' : 'Edit Coursera Course'">Coursera Course</h2>
+    </div>
+
+    <form class="card form-card" th:action="@{/coursera/save}" th:object="${item}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="courseName">Course Name <span class="req">*</span></label>
+            <input type="text" id="courseName" th:field="*{courseName}">
+            <span class="field-error" th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}"></span>
+        </div>
+        <div class="form-group">
+            <label for="provider">Provider <span class="req">*</span></label>
+            <input type="text" id="provider" th:field="*{provider}">
+            <span class="field-error" th:if="${#fields.hasErrors('provider')}" th:errors="*{provider}"></span>
+        </div>
+        <div class="form-group">
+            <label for="certificateId">Certificate ID</label>
+            <input type="text" id="certificateId" th:field="*{certificateId}">
+            <span class="field-error" th:if="${#fields.hasErrors('certificateId')}" th:errors="*{certificateId}"></span>
+        </div>
+        <div class="form-group">
+            <label for="completionDate">Completion Date</label>
+            <input type="date" id="completionDate" th:field="*{completionDate}">
+            <span class="field-error" th:if="${#fields.hasErrors('completionDate')}" th:errors="*{completionDate}"></span>
+        </div>
+        <div class="form-group">
+            <label for="skillsAcquired">Skills Acquired</label>
+            <textarea id="skillsAcquired" rows="3" th:field="*{skillsAcquired}"></textarea>
+            <span class="field-error" th:if="${#fields.hasErrors('skillsAcquired')}" th:errors="*{skillsAcquired}"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-secondary" th:href="@{/coursera}">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<div th:replace="~{fragments :: footer}"></div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
